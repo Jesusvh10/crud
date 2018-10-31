@@ -1,15 +1,31 @@
+<?php
+require_once('db.class.php');
+
+$objup = new db();
+$con = $objup->conecta_mysql();
+if(isset($_GET['id'])){
+
+	$id = $_GET['id'];
+	$sql = "SELECT * FROM usuarios WHERE id = $id";
+
+	$result = $con->query($sql);
+
+
+	while ($row = $result->fetch_array(MYSQLI_BOTH)){
+		$usuario = $row['usuario'];
+		$email = $row['email'];
+		$senha = $row['senha'];
+	}
+}
+?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
 
 		<title>Twitter clone</title>
-		
-		<!-- jquery - link cdn -->
-		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-		<!-- bootstrap - link cdn -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<?php include('header.php');?>
 	
 	</head>
 
@@ -45,17 +61,21 @@
 	    	<div class="col-md-4">
 	    		<h3>Inscreva-se já.</h3>
 	    		<br />
-				<form method="post" action="registra_usuario.php" id="formCadastrarse">
+				<form  method="post" action="registra_usuario.php" id="formCadastrarse">
 					<div class="form-group">
-						<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuário" required="requiored">
+						<input type="hidden" class="form-control" id="usuario" value="<?php echo $id; ?>" name="id" placeholder="id" >
 					</div>
 
 					<div class="form-group">
-						<input type="email" class="form-control" id="email" name="email" placeholder="Email" required="requiored">
+						<input type="text" class="form-control" id="usuario" value="<?php echo $usuario; ?>" name="usuario" placeholder="Usuário" required="requiored">
+					</div>
+
+					<div class="form-group">
+						<input type="email" class="form-control" id="email" name="email" value="<?php echo $email;?> " placeholder="Email" required="requiored">
 					</div>
 					
 					<div class="form-group">
-						<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required="requiored">
+						<input type="password" class="form-control" id="senha" name="senha" value="<?php echo $senha ;?>" placeholder="Senha" required="requiored">
 					</div>
 					
 					<button type="submit" class="btn btn-primary form-control">Inscreva-se</button>

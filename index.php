@@ -1,3 +1,11 @@
+<?php
+
+$erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+
+
+
+  ?>
+
 <!DOCTYPE HTML>
 <html lang="pt-br">
 	<head>
@@ -40,7 +48,7 @@
 						<div class="col-md-12">
 				    		<p>Você possui uma conta?</h3>
 				    		<br />
-							<form method="post" action="" id="formLogin">
+							<form  action= "validar.php"  method="post" action="" id="formLogin">
 								<div class="form-group">
 									<input type="text" class="form-control" id="campo_usuario" name="usuario" placeholder="Usuário" />
 								</div>
@@ -54,6 +62,16 @@
 								<br /><br />
 								
 							</form>
+						
+								<?php   
+
+										if ($erro == 1) {
+											echo "hla este usuairo no va ";
+										}
+
+
+								?>
+
 						</form>
 				  	</ul>
 	            </li>
